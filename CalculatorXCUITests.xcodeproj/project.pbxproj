@@ -14,6 +14,7 @@
 		A52535A326909E6900901F7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52535A126909E6900901F7E /* Main.storyboard */; };
 		A52535AF26909E6900901F7E /* CalculatorXCUITestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535AE26909E6900901F7E /* CalculatorXCUITestsTests.swift */; };
 		A52535BA26909E6900901F7E /* CalculatorXCUITestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535B926909E6900901F7E /* CalculatorXCUITestsUITests.swift */; };
+		A5641795269775EB00745150 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5641794269775EB00745150 /* CalculatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		A52535B526909E6900901F7E /* CalculatorXCUITestsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorXCUITestsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52535B926909E6900901F7E /* CalculatorXCUITestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorXCUITestsUITests.swift; sourceTree = "<group>"; };
 		A52535BB26909E6900901F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5641794269775EB00745150 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				A52535B926909E6900901F7E /* CalculatorXCUITestsUITests.swift */,
+				A5641794269775EB00745150 /* CalculatorView.swift */,
 				A52535BB26909E6900901F7E /* Info.plist */,
 			);
 			path = CalculatorXCUITestsUITests;
@@ -283,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5641795269775EB00745150 /* CalculatorView.swift in Sources */,
 				A52535BA26909E6900901F7E /* CalculatorXCUITestsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
