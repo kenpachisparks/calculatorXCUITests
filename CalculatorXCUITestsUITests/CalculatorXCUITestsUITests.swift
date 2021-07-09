@@ -9,64 +9,63 @@
 import XCTest
 
 class Calculator_TestsUITests: XCTestCase {
-    let calculatorApp = CalculatorView().calculatorApp
-    let calculatorView = CalculatorView()
+    let app = CalculatorView().calculatorApp
+    let calc = CalculatorView()
     
     override func setUp() {
-        calculatorApp.launch()
+        app.launch()
     }
 
     override func tearDown() {
-        calculatorApp.terminate()
+        app.terminate()
     }
 
     func testOpenCalculator() {
-        XCTAssertTrue(calculatorApp.exists, "Application is not opened")
-        XCTAssertTrue(calculatorView.allClearButton.title == "all clear", "AC button is not in view, check if calculator window opened.")
-        XCTAssertTrue(calculatorView.calculatorDisplay.value as! String == "0" , "Entry of calculator has been made. Make sure nothing is pressed.")
+        XCTAssertTrue(app.exists, "Application is not opened")
+        XCTAssertTrue(calc.allClearButton.title == "all clear", "AC button is not in view, check if calculator window opened.")
+        XCTAssertTrue(calc.calculatorDisplay.value as! String == "0" , "Entry of calculator has been made. Make sure nothing is pressed.")
     }
 
     func testEightInput() {
-        calculatorView.eightButton.click()
+        calc.eightButton.click()
         
-        XCTAssertTrue(calculatorView.calculatorDisplay.value as! String == "8", "Number 8 was not found in the view display. Make sure the button is being pressed.")
+        XCTAssertTrue(calc.calculatorDisplay.value as! String == "8", "Number 8 was not found in the view display. Make sure the button is being pressed.")
     }
     
     func testClear() {
-        calculatorView.eightButton.click()
-        calculatorView.clearButton.click()
+        calc.eightButton.click()
+        calc.clearButton.click()
         
-        XCTAssertTrue(calculatorView.calculatorDisplay.value as! String == "0", "Entry of calculator has been made. Make sure nothing is pressed.")
+        XCTAssertTrue(calc.calculatorDisplay.value as! String == "0", "Entry of calculator has been made. Make sure nothing is pressed.")
     }
     
     func testAddition() {
-        calculatorView.eightButton.click()
-        calculatorView.addButton.click()
-        calculatorView.nineButton.click()
-        calculatorView.equalsButton.click()
-        
-        XCTAssertTrue(calculatorView.calculatorDisplay.value as! String == "17", "Entry of calculator is wrong. Should be 17 in the view display.")
+		calc.testSimpleOperation("Test simple addition - 8 + 9",leftHand: calc.eightButton, operation: calc.addButton, rightHand: calc.nineButton, expectedResult: "17")
     }
+	
+	func testMultiplication() {
+		calc.testSimpleOperation("Test simple multiplication - 8 * 9",leftHand: calc.eightButton, operation: calc.multiplyButton, rightHand: calc.nineButton, expectedResult: "72")
+	}
     
     func testDoubleAddition() {
-        calculatorView.eightButton.click()
-        calculatorView.addButton.click()
-        calculatorView.nineButton.click()
+        calc.eightButton.click()
+        calc.addButton.click()
+        calc.nineButton.click()
         
         for _ in 0...3 {
-            calculatorView.equalsButton.click()
+            calc.equalsButton.click()
         }
         
-        XCTAssertTrue(calculatorView.calculatorDisplay.value as! String == "44", "Entry of calculator is wrong. Should be 44 in the view display.")
+        XCTAssertTrue(calc.calculatorDisplay.value as! String == "44", "Entry of calculator is wrong. Should be 44 in the view display.")
     }
     
     func testChangeAdditionToSubtraction() {
-        calculatorView.nineButton.click()
-        calculatorView.addButton.click()
-        calculatorView.substractButton.click()
-        calculatorView.twoButton.click()
-        calculatorView.equalsButton.click()
+        calc.nineButton.click()
+        calc.addButton.click()
+        calc.substractButton.click()
+        calc.twoButton.click()
+        calc.equalsButton.click()
         
-        XCTAssertTrue(calculatorView.calculatorDisplay.value as! String == "7", "Entry of calculator is wrong. Should be 7 in the view display.")
+        XCTAssertTrue(calc.calculatorDisplay.value as! String == "7", "Entry of calculator is wrong. Should be 7 in the view display.")
     }
 }

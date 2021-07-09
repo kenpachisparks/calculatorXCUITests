@@ -52,12 +52,13 @@ class CalculatorView: NSViewController {
     }
     
     var calculatorDisplay: XCUIElement { calculatorApp.staticTexts[displayView.calculatorDisplay] }
-    var allClearButton: XCUIElement { calculatorApp.buttons[buttonLabels.allClear].firstMatch }
-    var clearButton: XCUIElement { calculatorApp.buttons[buttonLabels.clear].firstMatch }
+	var allClearButton: XCUIElement { calculatorApp.windows.firstMatch.buttons[buttonLabels.allClear].firstMatch }
+	var clearButton: XCUIElement { calculatorApp.windows.firstMatch.buttons[buttonLabels.clear].firstMatch }
     var equalsButton: XCUIElement { calculatorApp.buttons[buttonLabels.equals].firstMatch }
     var substractButton: XCUIElement { calculatorApp.buttons[buttonLabels.substract].firstMatch }
     var addButton: XCUIElement { calculatorApp.buttons[buttonLabels.add].firstMatch }
     var percentButton: XCUIElement { calculatorApp.buttons[buttonLabels.percent].firstMatch }
+	var multiplyButton: XCUIElement { calculatorApp.buttons[buttonLabels.multiply].firstMatch }
     var divideButton: XCUIElement { calculatorApp.buttons[buttonLabels.divide].firstMatch }
     var negativeButton: XCUIElement { calculatorApp.buttons[buttonLabels.negative].firstMatch }
     var twoButton: XCUIElement { calculatorApp.buttons[buttonLabels.two] }
@@ -70,4 +71,15 @@ class CalculatorView: NSViewController {
     var sixButton: XCUIElement { calculatorApp.buttons[buttonLabels.six] }
     var eightButton: XCUIElement { calculatorApp.buttons[buttonLabels.eight] }
     var sevenButton: XCUIElement { calculatorApp.buttons[buttonLabels.seven] }
+	
+	func testSimpleOperation(_ description: String, leftHand: XCUIElement, operation: XCUIElement, rightHand: XCUIElement, expectedResult: String) {
+		
+		XCTContext.runActivity(named: description) { _ in
+			leftHand.click()
+			operation.click()
+			rightHand.click()
+			equalsButton.click()
+			XCTAssertTrue(calculatorDisplay.value as! String == expectedResult, "Unexpected result: expected \(expectedResult), found \(calculatorDisplay.value ?? "").")
+		}
+	}
 }
