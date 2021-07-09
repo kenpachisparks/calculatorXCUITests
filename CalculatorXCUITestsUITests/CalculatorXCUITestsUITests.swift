@@ -48,15 +48,15 @@ class Calculator_TestsUITests: XCTestCase {
 	}
     
     func testDoubleAddition() {
-        calc.eightButton.click()
-        calc.addButton.click()
-        calc.nineButton.click()
+		calc.testSimpleOperation("Test simple addition - 8 + 9",leftHand: calc.eightButton, operation: calc.addButton, rightHand: calc.nineButton, expectedResult: "17")
         
-        for _ in 0...3 {
-            calc.equalsButton.click()
-        }
-        
-        XCTAssertTrue(calc.calculatorDisplay.value as! String == "44", "Entry of calculator is wrong. Should be 44 in the view display.")
+		XCTContext.runActivity(named: "Repeat '=' and check results") { _ in
+			for _ in 0...2 {
+				calc.equalsButton.click()
+			}
+			
+			XCTAssertTrue(calc.calculatorDisplay.value as! String == "44", "Entry of calculator is wrong. Should be 44 in the view display.")
+		}
     }
     
     func testChangeAdditionToSubtraction() {
