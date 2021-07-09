@@ -9,8 +9,8 @@
 import XCTest
 
 class Calculator_TestsUITests: XCTestCase {
-    let app = CalculatorView().calculatorApp
-    let calc = CalculatorView()
+    let app = BasicView().calculatorApp
+    let calc = BasicView()
     
     override func setUp() {
         app.launch()

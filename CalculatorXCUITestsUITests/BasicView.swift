@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CalculatorView: NSViewController {
+class BasicView: NSViewController {
     let calculatorApp = XCUIApplication(bundleIdentifier: "com.apple.calculator")
     
     struct buttonLabels {
