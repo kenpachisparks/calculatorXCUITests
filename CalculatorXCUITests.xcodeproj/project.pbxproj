@@ -14,7 +14,7 @@
 		A52535A026909E6900901F7E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A525359F26909E6900901F7E /* Preview Assets.xcassets */; };
 		A52535A326909E6900901F7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52535A126909E6900901F7E /* Main.storyboard */; };
 		A52535AF26909E6900901F7E /* CalculatorXCUITestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535AE26909E6900901F7E /* CalculatorXCUITestsTests.swift */; };
-		A52535BA26909E6900901F7E /* CalculatorXCUITestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535B926909E6900901F7E /* CalculatorXCUITestsUITests.swift */; };
+		A52535BA26909E6900901F7E /* BasicViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535B926909E6900901F7E /* BasicViewUITests.swift */; };
 		A5641795269775EB00745150 /* BasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5641794269775EB00745150 /* BasicView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,7 @@
 		A52535AE26909E6900901F7E /* CalculatorXCUITestsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorXCUITestsTests.swift; sourceTree = "<group>"; };
 		A52535B026909E6900901F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A52535B526909E6900901F7E /* CalculatorXCUITestsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorXCUITestsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A52535B926909E6900901F7E /* CalculatorXCUITestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorXCUITestsUITests.swift; sourceTree = "<group>"; };
+		A52535B926909E6900901F7E /* BasicViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewUITests.swift; sourceTree = "<group>"; };
 		A52535BB26909E6900901F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5641794269775EB00745150 /* BasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,7 +133,7 @@
 		A52535B826909E6900901F7E /* CalculatorXCUITestsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				A52535B926909E6900901F7E /* CalculatorXCUITestsUITests.swift */,
+				A52535B926909E6900901F7E /* BasicViewUITests.swift */,
 				A5641794269775EB00745150 /* BasicView.swift */,
 				A52535BB26909E6900901F7E /* Info.plist */,
 				47E7CE6E2698CD5700C3F6DA /* ProgrammerView.swift */,
@@ -290,7 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5641795269775EB00745150 /* BasicView.swift in Sources */,
-				A52535BA26909E6900901F7E /* CalculatorXCUITestsUITests.swift in Sources */,
+				A52535BA26909E6900901F7E /* BasicViewUITests.swift in Sources */,
 				47E7CE6F2698CD5700C3F6DA /* ProgrammerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

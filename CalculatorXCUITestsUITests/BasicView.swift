@@ -1,6 +1,6 @@
 //
-//  CalculatorView.swift
-//  CalculatorXCUITestsUITests
+//  BasicViewUITests.swift
+//  BasicViewUITests
 //
 //  Created by Ryan T on 7/8/21.
 //  Copyright © 2021 Ryan Touvell. All rights reserved.
