@@ -16,6 +16,10 @@
 		A52535AF26909E6900901F7E /* CalculatorXCUITestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535AE26909E6900901F7E /* CalculatorXCUITestsTests.swift */; };
 		A52535BA26909E6900901F7E /* BasicViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52535B926909E6900901F7E /* BasicViewUITests.swift */; };
 		A5641795269775EB00745150 /* BasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5641794269775EB00745150 /* BasicView.swift */; };
+		A5D77473269A05BE0005EF2E /* ScientificView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D77472269A05BE0005EF2E /* ScientificView.swift */; };
+		A5D77476269A06040005EF2E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D77475269A06040005EF2E /* MenuBar.swift */; };
+		A5D77478269A06C20005EF2E /* ProgrammerViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D77477269A06C20005EF2E /* ProgrammerViewUITests.swift */; };
+		A5D7747A269A07200005EF2E /* ScientificViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D77479269A07200005EF2E /* ScientificViewUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,10 @@
 		A52535B926909E6900901F7E /* BasicViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewUITests.swift; sourceTree = "<group>"; };
 		A52535BB26909E6900901F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5641794269775EB00745150 /* BasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicView.swift; sourceTree = "<group>"; };
+		A5D77472269A05BE0005EF2E /* ScientificView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScientificView.swift; sourceTree = "<group>"; };
+		A5D77475269A06040005EF2E /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		A5D77477269A06C20005EF2E /* ProgrammerViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammerViewUITests.swift; sourceTree = "<group>"; };
+		A5D77479269A07200005EF2E /* ScientificViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScientificViewUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,10 +141,14 @@
 		A52535B826909E6900901F7E /* CalculatorXCUITestsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				A52535B926909E6900901F7E /* BasicViewUITests.swift */,
 				A5641794269775EB00745150 /* BasicView.swift */,
+				A52535B926909E6900901F7E /* BasicViewUITests.swift */,
 				A52535BB26909E6900901F7E /* Info.plist */,
+				A5D77475269A06040005EF2E /* MenuBar.swift */,
 				47E7CE6E2698CD5700C3F6DA /* ProgrammerView.swift */,
+				A5D77477269A06C20005EF2E /* ProgrammerViewUITests.swift */,
+				A5D77472269A05BE0005EF2E /* ScientificView.swift */,
+				A5D77479269A07200005EF2E /* ScientificViewUITests.swift */,
 			);
 			path = CalculatorXCUITestsUITests;
 			sourceTree = "<group>";
@@ -290,8 +302,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5641795269775EB00745150 /* BasicView.swift in Sources */,
+				A5D7747A269A07200005EF2E /* ScientificViewUITests.swift in Sources */,
 				A52535BA26909E6900901F7E /* BasicViewUITests.swift in Sources */,
 				47E7CE6F2698CD5700C3F6DA /* ProgrammerView.swift in Sources */,
+				A5D77473269A05BE0005EF2E /* ScientificView.swift in Sources */,
+				A5D77478269A06C20005EF2E /* ProgrammerViewUITests.swift in Sources */,
+				A5D77476269A06040005EF2E /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

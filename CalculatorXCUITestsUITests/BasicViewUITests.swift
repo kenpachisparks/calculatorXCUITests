@@ -1,5 +1,5 @@
 //
-//  CalculatorXCUITestsUITests.swift
+//  BasicViewUITests.swift
 //  CalculatorXCUITestsUITests
 //
 //  Created by Ryan T on 7/3/21.
@@ -8,12 +8,14 @@
 
 import XCTest
 
-class Calculator_TestsUITests: XCTestCase {
-    let app = BasicView().calculatorApp
-    let calc = BasicView()
+class BasicViewUITests: XCTestCase {
+    let basicView = BasicView()
+    let menuBar = MenuBar()
+    var app: XCUIApplication { basicView.app }
     
     override func setUp() {
         app.launch()
+        menuBar.enableBasicView()
     }
 
     override func tearDown() {
@@ -22,50 +24,107 @@ class Calculator_TestsUITests: XCTestCase {
 
     func testOpenCalculator() {
         XCTAssertTrue(app.exists, "Application is not opened")
-        XCTAssertTrue(calc.allClearButton.title == "all clear", "AC button is not in view, check if calculator window opened.")
-        XCTAssertTrue(calc.calculatorDisplay.value as! String == "0" , "Entry of calculator has been made. Make sure nothing is pressed.")
+        XCTAssertTrue(basicView.allClearButton.title == "all clear", "AC button is not in view, check if calculator window opened.")
+        basicView.displayViewMatches(expectedResult: "0")
     }
 
-    func testEightInput() {
-        calc.eightButton.click()
-        
-        XCTAssertTrue(calc.calculatorDisplay.value as! String == "8", "Number 8 was not found in the view display. Make sure the button is being pressed.")
+    func testNumberInput() {
+        XCTContext.runActivity(named: "Click number and confirm display matches") { _ in
+            basicView.eightButton.click()
+            basicView.displayViewMatches(expectedResult: "8")
+        }
     }
     
     func testClear() {
-        calc.eightButton.click()
-        calc.clearButton.click()
-        
-        XCTAssertTrue(calc.calculatorDisplay.value as! String == "0", "Entry of calculator has been made. Make sure nothing is pressed.")
+        XCTContext.runActivity(named: "Click number and clear the input") { _ in
+            basicView.eightButton.click()
+        basicView.clearButton.click()
+        basicView.displayViewMatches(expectedResult: "0")
+        }
     }
     
     func testAddition() {
-		calc.testSimpleOperation("Test simple addition - 8 + 9",leftHand: calc.eightButton, operation: calc.addButton, rightHand: calc.nineButton, expectedResult: "17")
+        basicView.simpleOperation("Test simple addition - 8 + 9",leftHand: basicView.eightButton, operation: basicView.addButton, rightHand: basicView.nineButton, expectedResult: "17")
     }
-	
-	func testMultiplication() {
-		calc.testSimpleOperation("Test simple multiplication - 8 * 9",leftHand: calc.eightButton, operation: calc.multiplyButton, rightHand: calc.nineButton, expectedResult: "72")
-	}
+    
+    func testMultiplication() {
+        basicView.simpleOperation("Test simple multiplication - 8 * 9",leftHand: basicView.eightButton, operation: basicView.multiplyButton, rightHand: basicView.nineButton, expectedResult: "72")
+    }
+    
+    func testDivision() {
+        basicView.simpleOperation("Test simple division - 8 / 4",leftHand: basicView.eightButton, operation: basicView.divideButton, rightHand: basicView.fourButton, expectedResult: "2")
+    }
     
     func testDoubleAddition() {
-		calc.testSimpleOperation("Test simple addition - 8 + 9",leftHand: calc.eightButton, operation: calc.addButton, rightHand: calc.nineButton, expectedResult: "17")
+        basicView.simpleOperation("Test simple addition - 8 + 9",leftHand: basicView.eightButton, operation: basicView.addButton, rightHand: basicView.nineButton, expectedResult: "17")
         
-		XCTContext.runActivity(named: "Repeat '=' and check results") { _ in
-			for _ in 0...2 {
-				calc.equalsButton.click()
-			}
-			
-			XCTAssertTrue(calc.calculatorDisplay.value as! String == "44", "Entry of calculator is wrong. Should be 44 in the view display.")
-		}
+        XCTContext.runActivity(named: "Repeat '=' and check results") { _ in
+            for _ in 0...2 {
+                basicView.equalsButton.click()
+            }
+            
+            basicView.displayViewMatches(expectedResult: "44")
+        }
     }
     
     func testChangeAdditionToSubtraction() {
-        calc.nineButton.click()
-        calc.addButton.click()
-        calc.substractButton.click()
-        calc.twoButton.click()
-        calc.equalsButton.click()
+        XCTContext.runActivity(named: "Click multiply operator then change to minus") { _ in
+            basicView.nineButton.click()
+            basicView.multiplyButton.click()
+            basicView.substractButton.click()
+            basicView.twoButton.click()
+            basicView.equalsButton.click()
+            
+            basicView.displayViewMatches(expectedResult: "7")
+        }
+    }
+    
+    func testNegativePositiveButton() {
+        XCTContext.runActivity(named: "Click multiply operator then change to minus") { _ in
+            basicView.fiveButton.click()
+            basicView.negativeButton.click()
+            
+            basicView.displayViewMatches(expectedResult: "-5")
+            
+            basicView.negativeButton.click()
+            
+            basicView.displayViewMatches(expectedResult: "5")
+        }
+    }
+    
+    func testDoubleNegativeOperation() {
+        basicView.simpleOperation("Test negative subtraction 3 - (-4)",leftHand: basicView.threeButton, operation: basicView.substractButton, rightHand: basicView.fourButton, expectedResult: "7", negativeButtonBool: true)
+    }
+    
+    func testPercentValue() {
+        XCTContext.runActivity(named: "Click multiply operator then change to minus") { _ in
+            menuBar.decimalPlaceZeroMenuItemButton.click()
+            basicView.fiveButton.click()
+            basicView.percentButton.click()
+            
+            basicView.displayViewMatches(expectedResult: "5e-2")
+        }
+    }
+    
+    func testDecimalValueTwo() {
+        menuBar.decimalPlaceTwoMenuItemButton.click()
         
-        XCTAssertTrue(calc.calculatorDisplay.value as! String == "7", "Entry of calculator is wrong. Should be 7 in the view display.")
+        basicView.simpleOperation("Test decminal value from 7/4",leftHand: basicView.sevenButton, operation: basicView.divideButton, rightHand: basicView.fourButton, expectedResult: "1.75")
+    }
+    
+    func testDecimalValueFifteen() {
+        menuBar.decimalPlaceFifteenMenuItemButton.click()
+        
+        basicView.simpleOperation("Test decminal value from 3/9",leftHand: basicView.threeButton, operation: basicView.divideButton, rightHand: basicView.nineButton, expectedResult: "0.333333333333333")
+    }
+    
+    func testMaxDisplayCap() {
+        XCTContext.runActivity(named: "Repeat '=' and check results") { _ in
+            for _ in 0...39 {
+                basicView.oneButton.click()
+            }
+            
+            basicView.displayViewMatches(expectedResult: "1111111111111111111111111111111111111110")
+        }
     }
 }
