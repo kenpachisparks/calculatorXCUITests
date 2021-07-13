@@ -8,15 +8,21 @@
 
 import XCTest
 
-class ProgrammerViewUITests: BasicViewUITests {
+class ProgrammerViewUITests: XCTestSetup {
     
     override func setUp() {
         app.launch()
         menuBar.enableProgrammerView()
     }
     
+    override func tearDown() {
+        app.terminate()
+    }
+    
     func testOpenProgrammerCalculator() {
-        XCTAssertTrue(app.exists, "Application is not opened")
-        XCTAssertTrue(app.exists, "Application is not opened")
+        XCTContext.runActivity(named: "Confirm Programmer Calculator is opened.") { _ in
+            XCTAssertTrue(app.exists, "Application is not opened")
+            XCTAssertTrue(programmerView.bitwiseExclusiveOrButton.exists, "Check if the Scientific View is opened")
+        }
     }
 }

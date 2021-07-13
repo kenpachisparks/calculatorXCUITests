@@ -8,9 +8,9 @@
 
 import XCTest
 
-class BasicView: NSViewController {
-    let app = XCUIApplication(bundleIdentifier: "com.apple.calculator")
-        
+public class BasicView: NSViewController {
+    var appWindow = ViewVariablePage().appWindow
+    
     struct basicViewButtonLabels {
         static let allClear = "all clear"
         static let clear = "clear"
@@ -36,6 +36,8 @@ class BasicView: NSViewController {
     
     struct displayView {
         static let calculatorDisplay = "main display"
+        static let notANumber = "Not a number"
+        static let inputMode = "input mode"
     }
     
     struct numberLabels {
@@ -51,51 +53,52 @@ class BasicView: NSViewController {
         static let zero = "0"
     }
     
-    var calculatorDisplay: XCUIElement { app.staticTexts[displayView.calculatorDisplay] }
-    var allClearButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.allClear].firstMatch }
-    var clearButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.clear].firstMatch }
-    var equalsButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.equals].firstMatch }
-    var substractButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.substract].firstMatch }
-    var addButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.add].firstMatch }
-    var percentButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.percent].firstMatch }
-    var multiplyButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.multiply].firstMatch }
-    var divideButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.divide].firstMatch }
-    var negativeButton: XCUIElement { app.windows.firstMatch.buttons[basicViewButtonLabels.negative].firstMatch }
-    var twoButton: XCUIElement { app.buttons[basicViewButtonLabels.two] }
-    var threeButton: XCUIElement { app.buttons[basicViewButtonLabels.three] }
-    var nineButton: XCUIElement { app.buttons[basicViewButtonLabels.nine] }
-    var zeroButton: XCUIElement { app.buttons[basicViewButtonLabels.zero] }
-    var oneButton: XCUIElement { app.buttons[basicViewButtonLabels.one] }
-    var fiveButton: XCUIElement { app.buttons[basicViewButtonLabels.five] }
-    var fourButton: XCUIElement { app.buttons[basicViewButtonLabels.four] }
-    var sixButton: XCUIElement { app.buttons[basicViewButtonLabels.six] }
-    var eightButton: XCUIElement { app.buttons[basicViewButtonLabels.eight] }
-    var sevenButton: XCUIElement { app.buttons[basicViewButtonLabels.seven] }
+    var calculatorDisplay: XCUIElement { appWindow.staticTexts[displayView.calculatorDisplay].firstMatch }
+    var inputModeDisplay: XCUIElement { appWindow.staticTexts[displayView.inputMode].firstMatch }
+    var allClearButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.allClear].firstMatch }
+    var clearButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.clear].firstMatch }
+    var equalsButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.equals].firstMatch }
+    var pointButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.point].firstMatch }
+    var substractButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.substract].firstMatch }
+    var addButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.add].firstMatch }
+    var percentButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.percent].firstMatch }
+    var multiplyButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.multiply].firstMatch }
+    var divideButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.divide].firstMatch }
+    var negativeButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.negative].firstMatch }
+    var twoButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.two].firstMatch }
+    var threeButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.three].firstMatch }
+    var nineButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.nine].firstMatch }
+    var zeroButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.zero].firstMatch }
+    var oneButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.one].firstMatch }
+    var fiveButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.five].firstMatch }
+    var fourButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.four].firstMatch }
+    var sixButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.six].firstMatch }
+    var eightButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.eight].firstMatch }
+    var sevenButton: XCUIElement { appWindow.buttons[basicViewButtonLabels.seven].firstMatch }
     
-    func simpleOperation(_ description: String, leftHand: XCUIElement, operation: XCUIElement, rightHand: XCUIElement, expectedResult: String, negativeButtonBool: Bool = false) {
+    func simpleOperation(_ description: String, leftHand: XCUIElement? = nil, operation: XCUIElement? = nil, rightHand: XCUIElement? = nil, expectedResult: String, negativeButton: XCUIElement? = nil, equalButton: XCUIElement? = nil, displayMatchBool: Bool = true) {
         XCTContext.runActivity(named: description) { _ in
-            leftHand.click()
-            operation.click()
-            rightHand.click()
-            
-            if negativeButtonBool {
-                negativeButton.click()
-            }
-            
-            equalsButton.click()
-            displayViewMatches(expectedResult: expectedResult)
+            leftHand?.click()
+            operation?.click()
+            rightHand?.click()
+            negativeButton?.click()
+            equalButton?.click()
+            XCTAssert(displayViewMatches(expectedResult: expectedResult, displayMatchBool: displayMatchBool).displayMatched, displayViewMatches(expectedResult: expectedResult, displayMatchBool: displayMatchBool).errorFound)
         }
     }
     
-    func displayViewMatches(expectedResult: String, displayMatchBool: Bool = true) {
+    func displayViewMatches(expectedResult: String, displayMatchBool: Bool) -> (displayMatched: Bool, errorFound: String){
         XCTContext.runActivity(named: "Check if \(expectedResult) is in display.") { _ in
-            if displayMatchBool {
-                XCTAssertTrue(calculatorDisplay.value as! String == expectedResult, "Unexpected result: expected \(expectedResult), found \(calculatorDisplay.value ?? "").")
-            }
-            else {
-                XCTAssertFalse(calculatorDisplay.value as! String == expectedResult, "Unexpected result: expected \(expectedResult), found \(calculatorDisplay.value ?? "").")
+            return displayMatchBool ? (calculatorDisplay.value as! String == expectedResult, "Unexpected result: expected \(expectedResult), found \(calculatorDisplay.value ?? "").") : (calculatorDisplay.value as! String != expectedResult, "Unexpected result: expected \(expectedResult), found \(calculatorDisplay.value ?? "").")
             }
             
-        }
+    }
+    
+    func checkInputMode(inputModeCheck: String) {
+        XCTAssertTrue(inputModeDisplay.value as! String == inputModeCheck, "Expected to be in input mode \(inputModeCheck), found \(inputModeDisplay.value ?? "").")
+    }
+    
+    func calculatorDisplayInput(inputString: String) {
+        calculatorDisplay.typeText(inputString)
     }
 }

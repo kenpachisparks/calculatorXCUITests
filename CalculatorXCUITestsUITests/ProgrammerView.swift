@@ -8,8 +8,8 @@
 
 import XCTest
 
-class ProgrammerView: NSViewController {
-    var app: XCUIApplication { BasicView().app }
+public class ProgrammerView: NSViewController {
+    var appWindow = ViewVariablePage().appWindow
     
     struct radioButtonLabels {
         static let eight = "8"
@@ -21,7 +21,7 @@ class ProgrammerView: NSViewController {
         static let bitwiseExclusiveOr = "bitwise exclusive or"
     }
     
-    var bitwiseExclusiveOrButton: XCUIElement { app.windows.firstMatch.buttons[programmerButtonLabels.bitwiseExclusiveOr].firstMatch }
+    var bitwiseExclusiveOrButton: XCUIElement { appWindow.buttons[programmerButtonLabels.bitwiseExclusiveOr].firstMatch }
     
     /*
  Group, 0x600003b20380, {{79.0, 699.0}, {400.0, 395.0}}, identifier: '_NS:815', Disabled

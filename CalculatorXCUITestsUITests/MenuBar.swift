@@ -7,11 +7,13 @@
 //
 
 import XCTest
+import Foundation
 
-class MenuBar: NSViewController {
-    let scientificView = ScientificView()
-    let programmerView = ProgrammerView()
-    var app: XCUIApplication { BasicView().app }
+public class MenuBar: NSViewController {
+    var app = ViewVariablePage().app
+    var basicView = BasicView()
+    var scientificView = ScientificView()
+    var programmerView = ProgrammerView()
     
     struct menuLabels {
         static let calculator = "Calculator"
@@ -148,15 +150,26 @@ class MenuBar: NSViewController {
     func enableBasicView() {
         if scientificView.piButton.exists || programmerView.bitwiseExclusiveOrButton.exists {
             enableMenuItem("Enable Basic Calculator Menu item.", menuItem: basicMenuItemButton)
-            self.enableMenuItem("Enable 0 Decimal Place Menu item.", menuItem: decimalPlaceZeroMenuItemButton)
+            enableMenuItem("Enable 0 Decimal Place Menu item.", menuItem: decimalPlaceZeroMenuItemButton)
         }
+        disableRPNView()
+        disableThousandsView()
     }
     
     func enableScientificView() {
         if !scientificView.piButton.exists {
             enableMenuItem("Enable Scientific Calculator Menu item.", menuItem: scientificMenuItemButton)
-            enableMenuItem("Enable 0 Decimal Place Menu item.", menuItem: decimalPlaceTwoMenuItemButton)
+            scientificView.piButton.click()
+            if basicView.calculatorDisplay.value as! String != "3.14" {
+                enableMenuItem("Enable 2 Decimal Place Menu item.", menuItem: decimalPlaceTwoMenuItemButton)
+                basicView.clearButton.click()
+            }
         }
+        if scientificView.piButton.exists && !basicView.oneButton.isHittable{
+            enableMenuItem("Enable Scientific Calculator Menu item.", menuItem: scientificMenuItemButton)
+        }
+        disableRPNView()
+        disableThousandsView()
     }
     
     func enableProgrammerView() {
@@ -164,5 +177,42 @@ class MenuBar: NSViewController {
             enableMenuItem("Enable Programmer Calculator Menu item.", menuItem: programmerMenuItemButton)
             enableMenuItem("Enable 0 Decimal Place Menu item.", menuItem: decimalPlaceZeroMenuItemButton)
         }
+        disableRPNView()
+        disableThousandsView()
+        disabledecimalView()
+    }
+    
+    func disableRPNView() {
+        if !basicView.calculatorDisplay.exists {
+            rpnMenuItemButton.click()
+        }
+    }
+    
+    func disableThousandsView() {
+        /* This would check if the checkmark is there using Applescript though Swift doesn't see the checkmark
+        tell application "System Events"
+            if value of attribute "AXMenuItemMarkChar" of menu item "Basic" of menu 1 of menu bar item "View" of menu bar 1 of process "Calculator" is equal to "✓" then click menu item "Scientific" of menu 1 of menu bar item "View" of menu bar 1 of process "Calculator"
+        end tell
+                 */
+        let inputNumber = "1111"
+        basicView.calculatorDisplayInput(inputString: inputNumber)
+        if basicView.displayViewMatches(expectedResult: inputNumber, displayMatchBool: false).displayMatched {
+            thousandsSeparatorsMenuItemButton.click()
+        }
+        basicView.clearButton.click()
+    }
+    
+    func disabledecimalView() {
+        /* This would check if the checkmark is there using Applescript though Swift doesn't see the checkmark
+        tell application "System Events"
+            if value of attribute "AXMenuItemMarkChar" of menu item "0" of menu item "Decimal Places" of menu 1 of menu bar item "View" of menu bar 1 of process "Calculator" is not equal to "✓" then click
+        end tell
+                 */
+        let inputNumber = "0.1234567891234567"
+        basicView.calculatorDisplayInput(inputString: inputNumber)
+        if basicView.displayViewMatches(expectedResult: inputNumber, displayMatchBool: false).displayMatched {
+            decimalPlaceZeroMenuItemButton.click()
+        }
+        basicView.clearButton.click()
     }
 }

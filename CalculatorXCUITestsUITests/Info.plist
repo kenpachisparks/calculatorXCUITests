@@ -18,5 +18,7 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+    <key>NSAppleEventsUsageDescription</key>
+    <string>...this is why I need permission...</string>
 </dict>
 </plist>

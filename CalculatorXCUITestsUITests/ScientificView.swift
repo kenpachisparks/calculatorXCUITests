@@ -8,8 +8,9 @@
 
 import XCTest
 
-class ScientificView: NSViewController {
-    var app: XCUIApplication { BasicView().app }
+public class ScientificView: NSViewController {
+    var appWindow = ViewVariablePage().appWindow
+    var basicView = BasicView()
     
     struct scientificButtonLabels {
         static let rightParen = "right paren"
@@ -58,37 +59,47 @@ class ScientificView: NSViewController {
         static let eToTheX = "to the power of (reverse parameters)"
     }
     
-    var rightParenButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.rightParen].firstMatch }
-    var leftParenButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.leftParen].firstMatch }
-    var inverseButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.inverse].firstMatch }
-    var sineButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.sine].firstMatch }
-    var hyperbolicCosineButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.hyperbolicCosine].firstMatch }
-    var xSquaredButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.xSquared].firstMatch }
-    var squareRootButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.squareRoot].firstMatch }
-    var cubeRootButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.cubeRoot].firstMatch }
-    var nthRootButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.nthRoot].firstMatch }
-    var hyperbolicSineButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.hyperbolicSine].firstMatch }
-    var powerOfYButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.powerOfY].firstMatch }
-    var cubedButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.cubed].firstMatch }
-    var naturalLogarithmButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.naturalLogarithm].firstMatch }
-    var logBaseButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.logBase].firstMatch }
-    var tangentButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.tangent].firstMatch }
-    var hyperbolicTangentButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.hyperbolicTangent].firstMatch }
-    var cosineButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.cosine].firstMatch }
-    var xFactorialButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.xFactorial].firstMatch }
-    var piButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.pi].firstMatch }
-    var randomNumberButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.randomNumber].firstMatch }
-    var eButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.e].firstMatch }
-    var EEButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.EE].firstMatch }
-    var radiansButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.radians].firstMatch }
-    var degreesButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.degrees].firstMatch }
-    var tenToXButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.tenToX].firstMatch }
-    var secondaryFunctionsButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.secondaryFunctions].firstMatch }
-    var memoryClearButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.memoryClear].firstMatch }
-    var memoryPlusButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.memoryPlus].firstMatch }
-    var memoryMinusButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.memoryMinus].firstMatch }
-    var memoryRecallButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.memoryRecall].firstMatch }
-    var eToTheXButton: XCUIElement { app.windows.firstMatch.buttons[scientificButtonLabels.eToTheX].firstMatch }
+    var rightParenButton: XCUIElement { appWindow.buttons[scientificButtonLabels.rightParen].firstMatch }
+    var leftParenButton: XCUIElement { appWindow.buttons[scientificButtonLabels.leftParen].firstMatch }
+    var inverseButton: XCUIElement { appWindow.buttons[scientificButtonLabels.inverse].firstMatch }
+    var sineButton: XCUIElement { appWindow.buttons[scientificButtonLabels.sine].firstMatch }
+    var hyperbolicCosineButton: XCUIElement { appWindow.buttons[scientificButtonLabels.hyperbolicCosine].firstMatch }
+    var xSquaredButton: XCUIElement { appWindow.buttons[scientificButtonLabels.xSquared].firstMatch }
+    var squareRootButton: XCUIElement { appWindow.buttons[scientificButtonLabels.squareRoot].firstMatch }
+    var cubeRootButton: XCUIElement { appWindow.buttons[scientificButtonLabels.cubeRoot].firstMatch }
+    var nthRootButton: XCUIElement { appWindow.buttons[scientificButtonLabels.nthRoot].firstMatch }
+    var hyperbolicSineButton: XCUIElement { appWindow.buttons[scientificButtonLabels.hyperbolicSine].firstMatch }
+    var powerOfYButton: XCUIElement { appWindow.buttons[scientificButtonLabels.powerOfY].firstMatch }
+    var cubedButton: XCUIElement { appWindow.buttons[scientificButtonLabels.cubed].firstMatch }
+    var naturalLogarithmButton: XCUIElement { appWindow.buttons[scientificButtonLabels.naturalLogarithm].firstMatch }
+    var logBaseButton: XCUIElement { appWindow.buttons[scientificButtonLabels.logBase].firstMatch }
+    var tangentButton: XCUIElement { appWindow.buttons[scientificButtonLabels.tangent].firstMatch }
+    var hyperbolicTangentButton: XCUIElement { appWindow.buttons[scientificButtonLabels.hyperbolicTangent].firstMatch }
+    var cosineButton: XCUIElement { appWindow.buttons[scientificButtonLabels.cosine].firstMatch }
+    var xFactorialButton: XCUIElement { appWindow.buttons[scientificButtonLabels.xFactorial].firstMatch }
+    var piButton: XCUIElement { appWindow.buttons[scientificButtonLabels.pi].firstMatch }
+    var randomNumberButton: XCUIElement { appWindow.buttons[scientificButtonLabels.randomNumber].firstMatch }
+    var eButton: XCUIElement { appWindow.buttons[scientificButtonLabels.e].firstMatch }
+    var EEButton: XCUIElement { appWindow.buttons[scientificButtonLabels.EE].firstMatch }
+    var radiansButton: XCUIElement { appWindow.buttons[scientificButtonLabels.radians].firstMatch }
+    var degreesButton: XCUIElement { appWindow.buttons[scientificButtonLabels.degrees].firstMatch }
+    var tenToXButton: XCUIElement { appWindow.buttons[scientificButtonLabels.tenToX].firstMatch }
+    var secondaryFunctionsButton: XCUIElement { appWindow.buttons[scientificButtonLabels.secondaryFunctions].firstMatch }
+    var memoryClearButton: XCUIElement { appWindow.buttons[scientificButtonLabels.memoryClear].firstMatch }
+    var memoryPlusButton: XCUIElement { appWindow.buttons[scientificButtonLabels.memoryPlus].firstMatch }
+    var memoryMinusButton: XCUIElement { appWindow.buttons[scientificButtonLabels.memoryMinus].firstMatch }
+    var memoryRecallButton: XCUIElement { appWindow.buttons[scientificButtonLabels.memoryRecall].firstMatch }
+    var eToTheXButton: XCUIElement { appWindow.buttons[scientificButtonLabels.eToTheX].firstMatch }
     
-    
+    func singleOperation(_ description: String, leftHand: XCUIElement? = nil, scienfiticMethod: XCUIElement? = nil, inverse: XCUIElement? = nil, pointButton: XCUIElement? = nil, expectedResult: String) {
+        XCTContext.runActivity(named: description) { _ in
+            
+            pointButton?.click()
+            leftHand?.click()
+            inverse?.click()
+            scienfiticMethod?.click()
+            
+            basicView.simpleOperation(description, expectedResult: expectedResult)
+        }
+    }
 }
